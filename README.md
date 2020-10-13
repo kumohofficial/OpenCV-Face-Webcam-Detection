@@ -4,7 +4,7 @@ A simple program written in python that tracks faces(along wither their eyes and
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install opencv.
 
 ```bash
 pip install opencv-python
