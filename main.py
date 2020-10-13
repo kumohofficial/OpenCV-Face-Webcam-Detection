@@ -3,6 +3,7 @@ import sys
 import logging as log
 import datetime as dt
 from time import sleep
+import time
 # Cascades 
 eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
@@ -10,13 +11,14 @@ smile_cascade = cv2.CascadeClassifier('haarcascade_smile.xml')
 #Log 
 log.basicConfig(filename='webcam.log',level=log.INFO)
 anterior = 0
-#Video out Things
-is_record = 0 # If true records the video and saves it to a file.
-if is_record == 1:
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
 #Web cam
 video_capture = cv2.VideoCapture(0)
+
+#Video out Things
+is_record = 1 # If true records the video and saves it to a file.
+if is_record == 1:
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('TEST - {}.avi'.format(time.strftime("%Y-%m-%d %H.%M.%S")),fourcc, 20.0, (640,480))
 
 while True:
     if not video_capture.isOpened(): #Checks if camera was opened
@@ -34,15 +36,16 @@ while True:
         minNeighbors=5,
     )
 
-    # Face Drawings
-    for (x, y, w, h) in faces:
+    for (x, y, w, h) in faces: # Face Drawings
         img = cv2.rectangle(frame, (x, y), (x+w, y+h), (252,74,3), 2)
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = img[y:y+h, x:x+w]
         eyes = eye_cascade.detectMultiScale(roi_gray,1.2,20)
         smiles = smile_cascade.detectMultiScale(roi_gray,1.8,15)
         for (ex,ey,ew,eh) in eyes:
-            cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(252, 198, 3),2)
+            eye_center = (x + ex + ew//2, y + ey + eh//2)
+            radius = int(round((ew + eh)*0.25))
+            frame = cv2.circle(frame, eye_center, radius, (252, 198, 3 ), 4)
         for (ex,ey,ew,eh) in smiles:
             cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0, 255, 0),2)
             
