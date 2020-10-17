@@ -28,7 +28,6 @@ def compress(every_minute,_data):
         temp += 1
 def main(every_minute):
     jsonData = loadJson('log.json')
-    jsonData = jsonData['occurrences']
     print("Compressing Faces of {} length by {}.".format(len(jsonData),every_minute))
     compress(every_minute,jsonData)
     dumpJson('compressed.json',compressed_data)
