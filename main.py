@@ -32,7 +32,7 @@ while True:
 
     faces = face_cascade.detectMultiScale(
         gray,
-        scaleFactor=1.3,
+        scaleFactor=1.7,
         minNeighbors=5,
     )
 
@@ -51,7 +51,7 @@ while True:
             
     if anterior != len(faces): # If face spotted: logs
         anterior = len(faces)
-        log.info("faces: "+str(len(faces))+" at "+str(dt.datetime.now()))
+        log.info("Face: "+str(len(faces))+" at "+str(dt.datetime.now()))
 
     cv2.imshow('Video', frame) # Display the resulting frame
 
