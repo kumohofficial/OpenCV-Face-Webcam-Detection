@@ -11,8 +11,8 @@ def showGraph(x_arr,y_arr):
     plt.xlabel('Time')
     plt.title('Faces')
     plt.show()
-def main(_x,_y):
-    data = loadJson('compressed.json')
+def main(_x,_y,fileName,outFileName):
+    data = loadJson(fileName)
     time = []
     faces = []
     for index in data:
@@ -23,10 +23,8 @@ def main(_x,_y):
     figure,ax = plt.subplots()
     ax.plot_date(time,faces,marker='',linestyle='-')
     figure.autofmt_xdate()
-    #plt.show()
-    plt.savefig('main.png')
-
-if(len(sys.argv) == 3):
-    main(sys.argv[1],sys.argv[2])
+    plt.savefig(outFileName)
+if(len(sys.argv) == 5):
+    main(int(sys.argv[1]),int(sys.argv[2]),str(sys.argv[3]),str(sys.argv[4]))
 else:
     print('wrong.')
