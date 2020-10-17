@@ -3,7 +3,7 @@ MAKING DATA SMALLER:
  ☐ Add a script to daily count face occurences (daily_conv.py)
  
 CONVERTING TO JSON:
- ☐ Unify json variable names
+ ✔ Unify json variable names @done(2020-10-17 17:03) @project(CONVERTING TO JSON)
  ✔ Strip strip time @done(2020-10-17 16:04) @project(MAKING DATA SMALLER / CONVERTING TO JSON)
 
 GRAPHS:
